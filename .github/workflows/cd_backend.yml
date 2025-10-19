@@ -26,3 +26,14 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/backend:${{ github.sha }}
          
+      - name: Deploy to remote server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+            docker stop backend || true
+            docker rm backend || true
+            docker run -d --name backend -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
