@@ -26,4 +26,14 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/websocket:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/websocket:${{ github.sha }}
 
-      
+      - name: Deploy to remote server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/websocket:latest
+            sudo docker stop websocket || true
+            sudo docker rm websocket || true
+            sudo docker run -d --name websocket -p 8080:8080 -e DATABASE_URL="${{ secrets.DATABASE_URL }}" ${{ secrets.DOCKERHUB_USERNAME }}/websocket:latest
