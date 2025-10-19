@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
-            docker stop backend || true
-            docker rm backend || true
-            docker run -d --name backend -p 8081:8081 -e DATABASE_URL=${{ secrets.DATABASE_URL }} ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+            sudo docker stop backend || true
+            sudo docker rm backend || true
+            sudo docker run -d --name backend -p 8081:8081 -e DATABASE_URL=${{ secrets.DATABASE_URL }} ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
