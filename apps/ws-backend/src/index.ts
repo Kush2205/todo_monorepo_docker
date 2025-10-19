@@ -36,7 +36,7 @@ wss.on("connection", (ws) => {
                     }
                 });
             } catch (e: any) {
-                ws.send(JSON.stringify({ error: e?.message ?? "Internal server error" }));
+                ws.send(JSON.stringify({ error: e?.message ?? "Internal server error cannot complete the request" }));
             }
         }
 
