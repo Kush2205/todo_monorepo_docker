@@ -1,4 +1,4 @@
-name: Deploy websocket
+name: Deploying websocket
 on:
   push:
     branches: [ main ]
