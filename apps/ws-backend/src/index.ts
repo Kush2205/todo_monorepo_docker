@@ -17,7 +17,7 @@ wss.on("connection", (ws) => {
         if (parsedMessage.command == "addTodo") {
             try {
                 await axios.post(
-                    "http://http-backend:8081/todo",
+                    "http://host.docker.internal:8081/todo",
                     { title: parsedMessage.title },
                     { headers: { "Content-Type": "application/json" } }
                 );

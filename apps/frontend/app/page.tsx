@@ -22,7 +22,7 @@ export default function Home() {
 
     load();
 
-    ws = new WebSocket("ws://localhost:8080");
+    ws = new WebSocket("ws://host.docker.internal:8080");
     ws.onopen = () => console.log("WebSocket connected");
     ws.onmessage = (event: MessageEvent) => {
       try {
