@@ -1,4 +1,4 @@
-name: Deploy backend
+name: Deploy http-backend
 on:
   push:
     branches: [ main ]
